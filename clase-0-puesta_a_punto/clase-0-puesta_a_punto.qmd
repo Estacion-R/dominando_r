@@ -1,0 +1,198 @@
+---
+title: "Dominando R: Potenciá tus datos"
+subtitle: "Puesta a punto"
+format:
+  revealjs: 
+    slide-number: false
+    chalkboard: 
+      buttons: true
+    preview-links: auto
+    logo: img/logo_estacionr.png
+resources:
+  - demo.pdf
+---
+
+
+# Bienvenidos y bienvenidas a Estación R
+
+::: columns
+::: {.column width="33%"}
+💬 [Slack](https://estacion-r.slack.com/archives/C08QB32P8S1)
+
+🔗 [Web](https://estacion-r.com)
+
+✉️ [Correo](mailto:pablotiscornia@estacion-r.com)
+:::
+
+
+::: {.column width="33%"}
+🐘 [Mastodon](https://mastodon.social/@pablote)
+
+𝕏 [X](https://twitter.com/estacion_erre)
+:::
+
+::: {.column width="33%"}
+[in] [LinkedIn](https://www.linkedin.com/company/estacion-r/)
+
+[ig] [Instagram](https://instagram.com/estacion.erre)
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Punto de partida
+
+<br>
+
+✅ Conceptos básicos de R (valores, vectores, data.framts, funciones, objetos)
+
+<br>
+
+✅ Cómo armar y organizar un proyecto de trabajo
+
+<br>
+
+✅ Conceptos básicos de procesamiento de datos con `tidyverse`
+
+
+## Hoja de Ruta - Módulo I 
+
+<br>
+
+📌  Optimización de Tablas y Transformaciones Avanzadas
+
+<br>
+
+::: columns
+::: {.column width="50%"}
+📦 Paquete `{dplyr}`
+
+```         
+🔧 distinct() 
+🔧 pull() 
+🔧 relocate()
+🔧 coalesce() 
+🔧 na_if() 
+🔧 slice()
+```
+:::
+
+::: {.column width="50%"}
+📦 Paquete `{tidyr}`
+
+```         
+🔧 pivot_longer() 
+🔧 pivot_wider() 
+```
+
+
+📦 Paquete `{janitor}`
+
+```         
+🔧 clean_names() 🔧 tabyll()  
+```
+:::
+:::
+
+
+## Hoja de Ruta - Módulo II
+
+<br>
+
+📌  Módulo 2: Combinando Datos como un Profesional
+
+<br>
+
+📦 Paquete `{dplyr}`
+
+```         
+🔧 left_join() 
+🔧 full_join() 
+🔧 anti_join()
+
+🔧 bind_rows()
+🔧 bind_cols()  
+```
+
+
+## Hoja de Ruta - Módulo III
+
+<br>
+
+📌  Módulo 3: Automatización y Optimización de código con Funciones Propias
+
+<br>
+
+::: columns
+::: {.column width="50%"}
+🔧 function(){}
+:::
+
+:::{.column width="50%"}
+
+📦 Paquete `{asserthat}`
+
+📦 Paquete `{testthat}`
+:::
+:::
+
+
+
+## Hoja de Ruta - Módulo IV
+
+<br>
+
+📌  Módulo 4: Hacelo Mejor y Más Rápido - Iteración
+
+<br>
+
+::: columns
+::: {.column width="50%"}
+🔧 for(){}
+:::
+
+:::{.column width="50%"}
+
+📦 Paquete `{dplyr}`
+
+```         
+🔧 across()
+```
+:::
+:::
+
+## Hoja de Ruta - Módulo V
+
+<br>
+
+📌  Módulo 5: Hacelo Mejor y Más Rápido - Condicionales y Control de Flujo
+
+<br>
+
+::: columns
+::: {.column width="50%"}
+🔧 if(){}
+
+🔧 if else(){}
+:::
+
+:::{.column width="50%"}
+📦 Paquete `{dplyr}`
+
+```         
+🔧 if_else()
+```
+:::
+:::
+
+## Configuración para esta clase
+
+<br>
+
+-   Armar un proyeto de trabajo nuevo
+
+-   Crear una carpeta en el llamada `datos`
+
+-   Descargar la base del [**Padrón Único Nacional de Alojamientos**](https://datos.yvera.gob.ar/dataset/padron-unico-nacional-alojamiento) (Argentina) y ubicarla en la carpeta `datos`
+
+-   Crear un **script** de trabajo

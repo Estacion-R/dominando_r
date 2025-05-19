@@ -1,0 +1,402 @@
+---
+title: "Análisis de Datos Climáticos con Pivoteo"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: "Aprende a transformar datos climáticos usando pivot_longer() y pivot_wider()"
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(ggplot2)
+
+# Creamos el conjunto de datos para el tutorial
+set.seed(123)
+
+# Datos climáticos mensuales para 4 ciudades durante 3 años
+clima_datos <- tibble(
+  ciudad = rep(c("Madrid", "Barcelona", "Sevilla", "Valencia"), each = 36),
+  año = rep(rep(2020:2022, each = 12), 4),
+  mes = rep(rep(1:12, 3), 4),
+  temperatura_max = round(rnorm(144, 
+                          mean = rep(c(15, 22, 25, 20), each = 36) + 
+                                rep(rep(c(-5, 0, 5, 0, -5, -8, 0, 5, 10, 5, 0, -5), 3), 4), 
+                          sd = 3), 1),
+  temperatura_min = round(rnorm(144, 
+                          mean = rep(c(5, 10, 15, 10), each = 36) + 
+                                rep(rep(c(-5, 0, 5, 0, -5, -8, 0, 5, 10, 5, 0, -5), 3), 4), 
+                          sd = 3), 1),
+  precipitacion = round(pmax(0, rnorm(144, 
+                         mean = rep(c(30, 40, 20, 35), each = 36) + 
+                               rep(rep(c(20, 10, 0, -10, -15, -20, -20, -15, -10, 10, 20, 25), 3), 4),
+                         sd = 15)), 1),
+  humedad = round(pmax(20, pmin(95, rnorm(144, 
+                      mean = rep(c(60, 70, 50, 65), each = 36),
+                      sd = 10))), 1)
+)
+
+# Datos para ejercicio 1
+clima_ejercicio1 <- clima_datos %>%
+  filter(año == 2022, ciudad %in% c("Madrid", "Barcelona")) %>%
+  select(ciudad, mes, temperatura_max, temperatura_min, precipitacion)
+
+# Datos para ejercicio 2
+clima_ejercicio2 <- clima_datos %>%
+  filter(año == 2021) %>%
+  group_by(ciudad, mes) %>%
+  summarize(
+    temp_media = mean((temperatura_max + temperatura_min)/2),
+    precip_total = sum(precipitacion),
+    .groups = "drop"
+  )
+
+# Datos para ejercicio 3
+clima_ejercicio3 <- clima_datos %>%
+  filter(ciudad %in% c("Madrid", "Barcelona", "Sevilla"), 
+         año == 2022, 
+         mes %in% c(1, 4, 7, 10)) %>%
+  select(ciudad, mes, temperatura_max, precipitacion, humedad)
+
+# Versión pivotada para ejercicio 4
+clima_ejercicio4 <- clima_datos %>%
+  filter(año == 2022, mes %in% c(1:6)) %>%
+  select(ciudad, mes, temperatura_max, temperatura_min) %>%
+  pivot_longer(
+    cols = c(temperatura_max, temperatura_min),
+    names_to = "tipo_temperatura",
+    values_to = "valor"
+  )
+
+# Datos para el ejercicio final
+clima_final <- clima_datos
+```
+
+## Introducción
+
+En este tutorial, aprenderás a usar las funciones `pivot_longer()` y `pivot_wider()` del paquete `tidyr` para transformar datos climáticos. Estas funciones son esenciales para preparar los datos antes de crear visualizaciones o realizar análisis estadísticos.
+
+## Conceptos básicos de pivoteo
+
+### ¿Qué es el pivoteo de datos?
+
+El pivoteo de datos es una técnica que nos permite transformar la estructura de nuestros datos entre formatos "ancho" y "largo":
+
+- **Formato ancho**: Cada variable tiene su propia columna
+- **Formato largo**: Las variables están contenidas en pares de columnas: una columna para el nombre de la variable y otra para el valor
+
+### ¿Cuándo usar cada formato?
+
+- **Formato ancho**: Útil para visualización e interpretación humana
+- **Formato largo**: Mejor para análisis estadístico y visualización con ggplot2
+
+## Ejercicio 1: De ancho a largo con pivot_longer()
+
+Observa los siguientes datos climáticos:
+
+```{r, echo=TRUE}
+# Datos climáticos de Madrid y Barcelona en 2022
+head(clima_ejercicio1)
+```
+
+Queremos transformar las columnas de temperatura máxima, temperatura mínima y precipitación a un formato largo con columnas para el "tipo_medida" y "valor".
+
+```{r pivot-longer1, exercise=TRUE}
+# Completa el código para pivotar el dataframe clima_ejercicio1
+
+```
+
+```{r pivot-longer1-hint-1}
+# Pista 1: Debes usar pivot_longer() y especificar las columnas a pivotar
+clima_ejercicio1 %>%
+  pivot_longer(
+    cols = c(..., ..., ...),
+    names_to = "...",
+    values_to = "..."
+  )
+```
+
+```{r pivot-longer1-hint-2}
+# Pista 2: Las columnas a pivotar son temperatura_max, temperatura_min y precipitacion
+clima_ejercicio1 %>%
+  pivot_longer(
+    cols = c(temperatura_max, temperatura_min, precipitacion),
+    names_to = "...",
+    values_to = "..."
+  )
+```
+
+```{r pivot-longer1-solution}
+# Solución
+clima_ejercicio1 %>%
+  pivot_longer(
+    cols = c(temperatura_max, temperatura_min, precipitacion),
+    names_to = "tipo_medida",
+    values_to = "valor"
+  )
+```
+
+### Interpretación
+
+En este ejercicio, hemos transformado el dataframe de un formato ancho (cada variable tiene su propia columna) a un formato largo (una columna para el tipo de medida y otra para su valor). Este formato es ideal para crear gráficos con ggplot2.
+
+## Ejercicio 2: De largo a ancho con pivot_wider()
+
+Ahora trabajaremos con un dataset que contiene temperaturas medias y precipitaciones totales por ciudad y mes en 2021:
+
+```{r}
+head(clima_ejercicio2)
+```
+
+Queremos crear un formato ancho donde cada combinación de ciudad y tipo de medida sea una columna.
+
+```{r pivot-wider1, exercise=TRUE}
+# Completa el código para convertir a formato ancho
+clima_ejercicio2 %>%
+  # Primero, convierte a formato largo
+  pivot_longer(
+    cols = c(temp_media, precip_total),
+    names_to = "tipo_medida",
+    values_to = "valor"
+  ) %>%
+  # Luego, convierte a formato ancho con columnas para cada ciudad y tipo de medida
+  
+```
+
+```{r pivot-wider1-hint-1}
+# Pista: Debes usar pivot_wider() con names_from y values_from
+clima_ejercicio2 %>%
+  pivot_longer(
+    cols = c(temp_media, precip_total),
+    names_to = "tipo_medida",
+    values_to = "valor"
+  ) %>%
+  pivot_wider(
+    names_from = c(..., ...),
+    values_from = ...
+  )
+```
+
+```{r pivot-wider1-solution}
+# Solución
+clima_ejercicio2 %>%
+  pivot_longer(
+    cols = c(temp_media, precip_total),
+    names_to = "tipo_medida",
+    values_to = "valor"
+  ) %>%
+  pivot_wider(
+    names_from = c(ciudad, tipo_medida),
+    values_from = valor
+  )
+```
+
+### Interpretación
+
+En este ejercicio, primero convertimos los datos a formato largo y luego utilizamos `pivot_wider()` para crear columnas para cada combinación de ciudad y tipo de medida. Este formato puede ser útil para presentar datos en tablas o para ciertos tipos de análisis.
+
+## Ejercicio 3: Separando nombres de columnas con pivot_longer()
+
+Observa los siguientes datos trimestrales:
+
+```{r}
+head(clima_ejercicio3)
+```
+
+Queremos crear un formato largo donde separemos las medidas en un formato más estructurado.
+
+```{r pivot-longer2, exercise=TRUE}
+# Transforma los datos a formato largo con pivot_longer()
+# Usa names_to para crear múltiples columnas
+
+```
+
+```{r pivot-longer2-hint-1}
+# Pista: Puedes extraer prefijos de los nombres de columna
+clima_ejercicio3 %>%
+  pivot_longer(
+    cols = c(temperatura_max, precipitacion, humedad),
+    names_to = "medida",
+    values_to = "valor"
+  )
+```
+
+```{r pivot-longer2-solution}
+# Solución
+clima_ejercicio3 %>%
+  pivot_longer(
+    cols = c(temperatura_max, precipitacion, humedad),
+    names_to = "medida",
+    values_to = "valor"
+  ) %>%
+  # Opcional: Podemos también separar "temperatura_max" en dos partes
+  mutate(
+    categoria = case_when(
+      medida == "temperatura_max" ~ "temperatura",
+      TRUE ~ medida
+    ),
+    tipo = case_when(
+      medida == "temperatura_max" ~ "máxima",
+      TRUE ~ NA_character_
+    )
+  )
+```
+
+## Ejercicio 4: Usando pivot_wider() con datos climáticos
+
+Este conjunto de datos ya está en formato largo:
+
+```{r}
+head(clima_ejercicio4)
+```
+
+Queremos convertirlo a formato ancho con columnas para temperatura máxima y mínima.
+
+```{r pivot-wider2, exercise=TRUE}
+# Convierte los datos de formato largo a ancho
+
+```
+
+```{r pivot-wider2-hint}
+# Pista: Usa pivot_wider() con names_from y values_from
+clima_ejercicio4 %>%
+  pivot_wider(
+    names_from = ...,
+    values_from = ...
+  )
+```
+
+```{r pivot-wider2-solution}
+# Solución
+clima_ejercicio4 %>%
+  pivot_wider(
+    names_from = tipo_temperatura,
+    values_from = valor
+  )
+```
+
+### Aplicación práctica
+
+El pivoteo de datos es esencial para crear visualizaciones efectivas. Por ejemplo:
+
+```{r}
+# Ejemplo de visualización con datos pivotados
+clima_ejercicio1 %>%
+  pivot_longer(
+    cols = c(temperatura_max, temperatura_min),
+    names_to = "tipo_temperatura",
+    values_to = "temperatura"
+  ) %>%
+  ggplot(aes(x = mes, y = temperatura, color = tipo_temperatura, group = tipo_temperatura)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~ciudad) +
+  labs(title = "Temperaturas mensuales en 2022",
+       x = "Mes",
+       y = "Temperatura (°C)") +
+  scale_x_continuous(breaks = 1:12) +
+  theme_minimal()
+```
+
+## Proyecto final: Análisis climático completo
+
+Ahora trabajaremos con el conjunto de datos completo para crear un análisis integral.
+
+### Paso 1: Preparar los datos para análisis
+
+```{r clima-final, exercise=TRUE}
+# Calcula las temperaturas medias mensuales por ciudad y año
+clima_final %>%
+  # Calcula la media entre temperatura máxima y mínima
+  
+```
+
+```{r clima-final-hint}
+# Pista: Calcula la temperatura media y luego pivot_wider para visualizar
+clima_final %>%
+  mutate(temp_media = (temperatura_max + temperatura_min) / 2) %>%
+  group_by(ciudad, año, mes) %>%
+  summarize(
+    temp_media = mean(temp_media),
+    precip_total = sum(precipitacion),
+    .groups = "drop"
+  )
+```
+
+```{r clima-final-solution}
+# Solución
+resultado_clima <- clima_final %>%
+  mutate(temp_media = (temperatura_max + temperatura_min) / 2) %>%
+  group_by(ciudad, año, mes) %>%
+  summarize(
+    temp_media = mean(temp_media),
+    precip_total = sum(precipitacion),
+    .groups = "drop"
+  )
+
+# Pivotamos para comparar ciudades por mes 
+comparacion_ciudades <- resultado_clima %>%
+  filter(año == 2022) %>%
+  pivot_wider(
+    id_cols = mes,
+    names_from = ciudad, 
+    values_from = temp_media
+  )
+
+# Mostramos los resultados
+comparacion_ciudades
+```
+
+### Paso 2: Crear visualizaciones
+
+```{r clima-viz, exercise=TRUE, exercise.setup="clima-final-solution"}
+# Crea una visualización de las temperaturas medias
+
+```
+
+```{r clima-viz-solution}
+# Solución para la visualización
+resultado_clima %>%
+  ggplot(aes(x = mes, y = temp_media, color = ciudad)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~año) +
+  labs(title = "Temperatura media mensual por ciudad",
+       x = "Mes",
+       y = "Temperatura media (°C)") +
+  scale_x_continuous(breaks = 1:12) +
+  theme_minimal()
+```
+
+### Análisis de correlación entre temperatura y precipitación
+
+```{r clima-correlacion, exercise=TRUE, exercise.setup="clima-final-solution"}
+# Pivota los datos para analizar la correlación entre temperatura y precipitación
+
+```
+
+```{r clima-correlacion-solution}
+# Solución
+resultado_clima %>%
+  ggplot(aes(x = temp_media, y = precip_total, color = ciudad)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~año) +
+  labs(title = "Relación entre temperatura media y precipitación",
+       x = "Temperatura media (°C)",
+       y = "Precipitación total (mm)") +
+  theme_minimal()
+```
+
+## Conclusión
+
+¡Felicitaciones! Has completado el tutorial sobre pivoteo de datos climáticos. Ahora eres capaz de:
+
+1. Transformar datos de formato ancho a largo con `pivot_longer()`
+2. Transformar datos de formato largo a ancho con `pivot_wider()`
+3. Combinar operaciones de pivoteo con otras funciones de `dplyr`
+4. Preparar datos para visualizaciones efectivas
+
+Estos conceptos te permitirán manipular datos de manera eficiente para cualquier tipo de análisis estadístico o visualización.

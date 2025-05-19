@@ -1,0 +1,25 @@
+---
+title: "Pivoteo de tablas"
+subtitle: "Tratamiento de datos II"
+format:
+  revealjs: 
+    slide-number: true
+    chalkboard: 
+      buttons: true
+    preview-links: auto
+    logo: img/logo_estacionr.png
+    #css: styles.css
+resources:
+  - demo.pdf
+---
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Going to sleep
+
+- Get in bed
+- Count sheep
+
