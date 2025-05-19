@@ -193,6 +193,6 @@ resources:
 
 -   Crear una carpeta en el llamada `datos`
 
--   Descargar la base del [**Padrón Único Nacional de Alojamientos**](https://datos.yvera.gob.ar/dataset/padron-unico-nacional-alojamiento) (Argentina) y ubicarla en la carpeta `datos`
+-   Descargar la base de [**Ingreso de anual de Personas 2024 - MX**](https://github.com/Estacion-R/dominando_r/blob/main/data/base_personas_ingreso_anual_2024.csv) y ubicarla en la carpeta `datos`
 
 -   Crear un **script** de trabajo

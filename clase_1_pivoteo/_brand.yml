@@ -4,8 +4,8 @@ color:
     blue: "#405BFF"
     yellow: "#EAFF38"
   background: "white"
-  foreground: blue
-  primary: black
+  foreground: black
+  primary: blue
 
 # logo:
 #   medium: img/logo_estacionr.png
@@ -16,3 +16,11 @@ typography:
       source: google
   base: Ubuntu
   headings: Ubuntu
+  
+  # monospace: Space Mono
+  # monospace-inline:
+  #   color: "red"
+  #   background-color: "green" # or use a named color from `color`
+  monospace-block:
+    #background-color: "#31a354"
+    color: "#31a354"

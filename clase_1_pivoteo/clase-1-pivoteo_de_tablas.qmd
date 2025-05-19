@@ -1,9 +1,14 @@
 ---
-title: "Pivoteo de tablas"
+title: "Optimización de Tablas y Transformaciones Avanzadas"
 subtitle: "Tratamiento de datos II"
 format:
   revealjs: 
     slide-number: true
+    code-copy: true
+    code-tools: true
+    execute:
+      echo: true
+    highlight-style: atom-one-light
     chalkboard: 
       buttons: true
     preview-links: auto
@@ -13,13 +18,189 @@ resources:
   - demo.pdf
 ---
 
-## Getting up
 
-- Turn off alarm
-- Get out of bed
+# Bienvenidos y bienvenidas a Estación R
 
-## Going to sleep
+::: columns
+::: {.column width="33%"}
+💬 [Slack](https://estacion-r.slack.com/archives/C08QB32P8S1)
 
-- Get in bed
-- Count sheep
+🔗 [Web](https://estacion-r.com)
+
+✉️ [Correo](mailto:pablotiscornia@estacion-r.com)
+:::
+
+
+::: {.column width="33%"}
+🐘 [Mastodon](https://mastodon.social/@pablote)
+
+𝕏 [X](https://twitter.com/estacion_erre)
+:::
+
+::: {.column width="33%"}
+[in] [LinkedIn](https://www.linkedin.com/company/estacion-r/)
+
+[ig] [Instagram](https://instagram.com/estacion.erre)
+:::
+:::
+
+
+## Hoja de Ruta - Módulo I 
+
+<br>
+
+📌  Optimización de Tablas y Transformaciones Avanzadas
+
+<br>
+
+::: columns
+::: {.column width="50%"}
+📦 Paquete `{dplyr}`
+
+```         
+🔧 distinct() 
+🔧 pull() 
+🔧 relocate()
+🔧 coalesce() 
+🔧 na_if() 
+🔧 slice()
+```
+:::
+
+::: {.column width="50%"}
+📦 Paquete `{tidyr}`
+
+```         
+🔧 pivot_longer() 
+🔧 pivot_wider() 
+```
+
+
+📦 Paquete `{janitor}`
+
+```         
+🔧 clean_names() 🔧 tabyll()  
+```
+:::
+:::
+
+
+
+## Configuración para esta clase
+
+<br>
+
+::: incremental
+- ✅ Armar un proyeto de trabajo nuevo
+
+- ✅ Crear una carpeta en el llamada `datos`
+
+- ✅ Descargar la base de [**Ingreso de anual de Personas 2024 - MX**](https://github.com/Estacion-R/dominando_r/blob/main/data/base_personas_ingreso_anual_2024.csv) y ubicarla en la carpeta `datos`
+
+- ✅ Crear un **script** de trabajo
+:::
+
+
+## Configuración para esta clase
+
+- Código para cargar la base directo desde Github, sin tener que descargarla (se necesita conexión a internet)
+
+<br>
+
+```{r}
+#| echo: true
+library(readr)
+
+### Cargo base de trabajo
+valor_ruta <- "https://raw.githubusercontent.com/Estacion-R/dominando_r/main/data/base_personas_ingreso_anual_2024.csv"
+
+df_ingresos_orig <- read_csv(valor_ruta)
+```
+
+
+
+## Procesamiento de datos - Buenas prácticas {.smaller .scrollable transition="slide"}
+
+<br><br>
+
+::: incremental
+-   Diagnosticar
+-   Procesar
+-   Chequear
+:::
+
+
+## Procesamiento de datos - Buenas prácticas {.smaller .scrollable transition="slide"}
+
+- Ejemplo: Nombre de columnas
+
+
+::: panel-tabset
+
+### Diagnosticar
+
+```{r}
+#| echo: true
+
+colnames(df_ingresos_orig)
+```
+
+### Procesar
+
+```{r}
+#| echo: true
+
+library(janitor)
+
+df_ingresos_trab <- df_ingresos_orig %>% 
+  clean_names()
+```
+
+### Chequear
+
+```{r}
+colnames(df_ingresos_trab)
+```
+:::
+
+
+## Procesamiento de datos - Buenas prácticas {.smaller .scrollable transition="slide"}
+
+- Ejemplo: Categorías de una variable
+
+::: panel-tabset
+### Diagnosticar
+
+```{r}
+unique(df_ingresos_trab$ciudad_residencia)
+```
+
+<br>
+
+```{r}
+length(unique(df_ingresos_trab$ciudad_residencia))
+```
+
+### Procesar
+
+```{r}
+library(dplyr)
+library(stringr)
+
+df_ingresos_trab <- df_ingresos_trab %>% 
+  mutate(ciudad_residencia = str_to_sentence(ciudad_residencia))
+```
+
+### Chequear
+
+```{r}
+unique(df_ingresos_trab$ciudad_residencia)
+```
+
+<br>
+
+```{r}
+length(unique(df_ingresos_trab$ciudad_residencia))
+```
+:::
 

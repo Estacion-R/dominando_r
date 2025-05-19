@@ -1,0 +1,16 @@
+.hljs {
+  background: #ffffff;
+  color: #111;
+}
+
+.hljs-string {
+  color: #d6336c; /* reddish pink */
+}
+
+.hljs-keyword {
+  color: #005cc5; /* blue */
+}
+
+.hljs-comment {
+  color: #6a737d; /* gray */
+}

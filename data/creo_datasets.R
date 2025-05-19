@@ -1,4 +1,7 @@
+
+### Cargo librerías
 library(tidyverse)
+library(messy)
 
 set.seed(123)  # Para reproducibilidad
 
@@ -20,4 +23,11 @@ datos_sucios <- bind_rows(base_original, duplicados) %>%
     "Ingreso Anual $" = replace(`Ingreso Anual $`, sample(1:100, 8), NA)
   )
 
+### Cambio minusculas/mayúsculas
+datos_sucios <- change_case(datos_sucios, "Ciudad Residencia")
+
+
 datos_sucios
+
+### Creo el .csv
+write_csv(datos_sucios, "data/base_personas_ingreso_anual_2024.csv")
