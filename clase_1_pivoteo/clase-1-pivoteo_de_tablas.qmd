@@ -18,6 +18,18 @@ resources:
   - demo.pdf
 ---
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+options(scipen = 999)
+
+library(dplyr)
+library(janitor)
+library(magrittr)
+```
+
 
 # Bienvenidos y bienvenidas a Estación R
 
@@ -205,4 +217,162 @@ unique(df_ingresos_trab$ciudad_residencia)
 length(unique(df_ingresos_trab$ciudad_residencia))
 ```
 :::
+
+## Pregunta
+
+<br>
+
+🗳 Votar: ¿Qué hace la función `str_to_title()`?
+
+```{r}
+str_to_title(c("pepe Locura", "Rodobolfo Lanzini", "lola lala"))
+```
+
+- 𝐀 --> Agrega una mayúscula a la primera letra de la primera palabra
+- 𝐁 --> Agrega una mayúscula a la primera letra de todas las palabras
+- 𝐂 --> Pasa todo a minúscula
+
+
+## Procesamiento de datos
+
+📚 Kit de funciones:
+
+<br>
+
+🪛 `janitor::clean_names()`: _Simplifica y estandariza nombres de columnas._
+
+🪛 `dplyr::distinct()`: _Filtra y mantiene solo filas únicas según variables específicas._
+
+🪛 `dplyr::pull()`: _Extrae una columna como vector._
+
+
+## Procesamiento de datos
+
+📚 Kit de funciones:
+
+<br>
+
+🪛 `dplyr::coalesce()`: _Ayuda a manejar valores faltantes reemplazándolos con valores específicos._
+
+🪛 `dplyr::na_if()`: _Convierte valores específicos (por ejemplo valores erróneos) a NA._
+
+🪛 `dplyr::slice()`: _Selecciona subconjuntos específicos de filas según su posición._
+
+
+## Procesamiento de datos
+
+<br>
+
+🪛 `distinct()`: _Filtra y mantiene solo filas únicas según variables específicas._
+
+```{r}
+# Identifico casos duplicados si los hay
+
+df_duplicados <- df_ingresos_trab %>% 
+  get_dupes()
+
+head(df_duplicados, n = 3)
+```
+
+## Procesamiento de datos
+
+<br>
+
+🪛 `distinct()`: _Filtra y mantiene solo filas únicas según variables específicas._
+
+```{r}
+# Identifico casos duplicados si los hay
+
+df_ingresos_trab <- df_ingresos_trab %>% 
+  distinct()
+
+### Chequeo
+df_ingresos_trab %>% 
+  get_dupes()
+```
+
+## Procesamiento de datos
+
+<br>
+
+🪛 `pull()`: _Extrae una columna como vector, facilitando ciertas operaciones._
+
+```{r}
+# Obtener vector con todos los ingresos anuales, en modo tidyverse
+vec_ingresos <- df_ingresos_trab |> 
+  filter(ciudad_residencia == "Puebla") %>% 
+  pull(ingreso_anual)
+
+mean(vec_ingresos, na.rm = TRUE)
+
+```
+
+
+## Procesamiento de datos
+
+<br>
+
+🪛 `pull()`: _Extrae una columna como vector, facilitando ciertas operaciones._
+
+```{r}
+# Obtener vector con todos los ingresos anuales, en modo tidyverse
+valor_ingreso_max_puebla <- df_ingresos_trab |> 
+  filter(ciudad_residencia == "Puebla") %>% 
+  filter(ingreso_anual == max(ingreso_anual, na.rm = TRUE)) %>% 
+  pull(ingreso_anual)
+
+valor_ingreso_max_puebla
+
+```
+
+
+## Procesamiento de datos
+
+El ingreso máximo de la ciudad de Pueba es de **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**
+
+
+```{r}
+# El ingreso máximo de la ciudad de Pueba es de **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**
+
+```
+
+
+## Procesamiento de datos
+
+<br>
+
+🪛 `dplyr::coalesce()`: _Ayuda a manejar valores faltantes reemplazándolos con valores específicos._
+
+
+
+## Procesamiento de datos
+
+::: panel-tabset
+
+### Diagnóstico
+```{r}
+# Chequeo valores NA en columna `ingreso_anual`
+df_ingresos_trab %>% 
+  count("valores NA" = is.na(ingreso_anual))
+```
+
+### Procesamiento
+```{r}
+# Reemplazo NA por ceros
+df_ingresos_trab <- df_ingresos_trab %>% 
+  mutate(ingreso_anual = coalesce(ingreso_anual, 0))
+```
+
+### Chequeo
+
+```{r}
+# Chequeo valores NA en columna `ingreso_anual`
+df_ingresos_trab %>% 
+  count("valores NA" = is.na(ingreso_anual))
+```
+
+:::
+
+
+
 

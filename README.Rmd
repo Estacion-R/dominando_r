@@ -1,0 +1,22 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# dominando_r
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+
+## Diapositivas de clase
+
+- [Clase 1](https://estacion-r.github.io/dominando_r/clase_1_pivoteo/clase-1-pivoteo_de_tablas.html)
