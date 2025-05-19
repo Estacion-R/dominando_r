@@ -193,14 +193,8 @@ resources:
 :::
 :::
 
-## Configuración para esta clase
+## Plataformas y herramientas durante la cursada
 
-<br>
+![](../img/pag_estacionr_mis_cursos.png){.absolute top="170" left="30" width="400" height="400"}
 
--   Armar un proyeto de trabajo nuevo
-
--   Crear una carpeta en el llamada `datos`
-
--   Descargar la base de [**Ingreso de anual de Personas 2024 - MX**](https://github.com/Estacion-R/dominando_r/blob/main/data/base_personas_ingreso_anual_2024.csv) y ubicarla en la carpeta `datos`
-
--   Crear un **script** de trabajo
+![](../img/slack_dominando_r.png){.absolute .fragment top="150" right="80" width="450"}

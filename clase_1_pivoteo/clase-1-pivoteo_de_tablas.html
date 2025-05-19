@@ -243,8 +243,8 @@
 <p><br></p>
 <div>
 <ul>
-<li class="fragment"><p>✅ Armar un proyeto de trabajo nuevo</p></li>
-<li class="fragment"><p>✅ Crear una carpeta en el llamada <code>datos</code></p></li>
+<li class="fragment"><p>✅ Armar un proyeto de trabajo</p></li>
+<li class="fragment"><p>✅ Crear una carpeta llamada <code>datos</code></p></li>
 <li class="fragment"><p>✅ Descargar la base de <a href="https://github.com/Estacion-R/dominando_r/blob/main/data/base_personas_ingreso_anual_2024.csv"><strong>Ingreso de anual de Personas 2024 - MX</strong></a> y ubicarla en la carpeta <code>datos</code></p></li>
 <li class="fragment"><p>✅ Crear un <strong>script</strong> de trabajo</p></li>
 </ul>
@@ -264,6 +264,9 @@
 <span id="cb4-5"><a href=""></a></span>
 <span id="cb4-6"><a href=""></a>df_ingresos_orig <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(valor_ruta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="procesamiento-de-datos---mapa" class="slide level2">
+<h2>Procesamiento de datos - Mapa</h2>
 </section>
 <section id="procesamiento-de-datos---buenas-prácticas" class="slide level2 smaller scrollable" data-transition="slide">
 <h2>Procesamiento de datos - Buenas prácticas</h2>
@@ -493,7 +496,9 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="co"># Chequeo valores NA en columna `ingreso_anual`</span></span>
 <span id="cb30-2"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb30-3"><a href=""></a>  <span class="fu">count</span>(<span class="st">"valores NA"</span> <span class="ot">=</span> <span class="fu">is.na</span>(ingreso_anual))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a href=""></a>  <span class="fu">count</span>(</span>
+<span id="cb30-4"><a href=""></a>    <span class="st">"valores NA"</span> <span class="ot">=</span> <span class="fu">is.na</span>(ingreso_anual)</span>
+<span id="cb30-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   `valores NA`     n
@@ -507,14 +512,18 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="co"># Reemplazo NA por ceros</span></span>
 <span id="cb32-2"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb32-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">ingreso_anual =</span> <span class="fu">coalesce</span>(ingreso_anual, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-4"><a href=""></a>    <span class="at">ingreso_anual =</span> <span class="fu">coalesce</span>(ingreso_anual, <span class="dv">0</span>)</span>
+<span id="cb32-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-3-3">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="co"># Chequeo valores NA en columna `ingreso_anual`</span></span>
 <span id="cb33-2"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb33-3"><a href=""></a>  <span class="fu">count</span>(<span class="st">"valores NA"</span> <span class="ot">=</span> <span class="fu">is.na</span>(ingreso_anual))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-3"><a href=""></a>  <span class="fu">count</span>(</span>
+<span id="cb33-4"><a href=""></a>    <span class="st">"valores NA"</span> <span class="ot">=</span> <span class="fu">is.na</span>(ingreso_anual)</span>
+<span id="cb33-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   `valores NA`     n

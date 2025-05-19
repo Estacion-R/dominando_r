@@ -103,9 +103,9 @@ library(magrittr)
 <br>
 
 ::: incremental
-- ✅ Armar un proyeto de trabajo nuevo
+- ✅ Armar un proyeto de trabajo 
 
-- ✅ Crear una carpeta en el llamada `datos`
+- ✅ Crear una carpeta llamada `datos`
 
 - ✅ Descargar la base de [**Ingreso de anual de Personas 2024 - MX**](https://github.com/Estacion-R/dominando_r/blob/main/data/base_personas_ingreso_anual_2024.csv) y ubicarla en la carpeta `datos`
 
@@ -128,6 +128,9 @@ valor_ruta <- "https://raw.githubusercontent.com/Estacion-R/dominando_r/main/dat
 
 df_ingresos_orig <- read_csv(valor_ruta)
 ```
+
+
+## Procesamiento de datos - Mapa
 
 
 
@@ -353,14 +356,18 @@ El ingreso máximo de la ciudad de Pueba es de **$`r format(valor_ingreso_max_pu
 ```{r}
 # Chequeo valores NA en columna `ingreso_anual`
 df_ingresos_trab %>% 
-  count("valores NA" = is.na(ingreso_anual))
+  count(
+    "valores NA" = is.na(ingreso_anual)
+    )
 ```
 
 ### Procesamiento
 ```{r}
 # Reemplazo NA por ceros
 df_ingresos_trab <- df_ingresos_trab %>% 
-  mutate(ingreso_anual = coalesce(ingreso_anual, 0))
+  mutate(
+    ingreso_anual = coalesce(ingreso_anual, 0)
+    )
 ```
 
 ### Chequeo
@@ -368,7 +375,9 @@ df_ingresos_trab <- df_ingresos_trab %>%
 ```{r}
 # Chequeo valores NA en columna `ingreso_anual`
 df_ingresos_trab %>% 
-  count("valores NA" = is.na(ingreso_anual))
+  count(
+    "valores NA" = is.na(ingreso_anual)
+    )
 ```
 
 :::
