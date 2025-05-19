@@ -342,7 +342,9 @@
 <span id="cb14-2"><a href=""></a><span class="fu">library</span>(stringr)</span>
 <span id="cb14-3"><a href=""></a></span>
 <span id="cb14-4"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">ciudad_residencia =</span> <span class="fu">str_to_sentence</span>(ciudad_residencia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-5"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-6"><a href=""></a>    <span class="at">ciudad_residencia =</span> <span class="fu">str_to_lower</span>(ciudad_residencia),</span>
+<span id="cb14-7"><a href=""></a>    <span class="at">ciudad_residencia =</span> <span class="fu">str_to_sentence</span>(ciudad_residencia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-2-3">

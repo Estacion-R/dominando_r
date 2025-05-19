@@ -188,7 +188,9 @@ library(dplyr)
 library(stringr)
 
 df_ingresos_trab <- df_ingresos_trab %>% 
-  mutate(ciudad_residencia = str_to_sentence(ciudad_residencia))
+  mutate(
+    ciudad_residencia = str_to_lower(ciudad_residencia),
+    ciudad_residencia = str_to_sentence(ciudad_residencia))
 ```
 
 ### Chequear
