@@ -6,6 +6,7 @@ format:
     slide-number: true
     code-copy: true
     code-tools: true
+    incremental: true
     execute:
       echo: true
     highlight-style: atom-one-light
@@ -221,7 +222,7 @@ length(unique(df_ingresos_trab$ciudad_residencia))
 ```
 :::
 
-## Pregunta
+## Pregunta {.smaller}
 
 <br>
 
@@ -230,6 +231,8 @@ length(unique(df_ingresos_trab$ciudad_residencia))
 ```{r}
 str_to_title(c("pepe Locura", "Rodobolfo Lanzini", "lola lala"))
 ```
+
+<br>
 
 - 𝐀 --> Agrega una mayúscula a la primera letra de la primera palabra
 - 𝐁 --> Agrega una mayúscula a la primera letra de todas las palabras
@@ -269,8 +272,8 @@ str_to_title(c("pepe Locura", "Rodobolfo Lanzini", "lola lala"))
 🪛 `distinct()`: _Filtra y mantiene solo filas únicas según variables específicas._
 
 ```{r}
-# Identifico casos duplicados si los hay
-
+### Diagnóstico
+# Identifico si existen casos duplicados
 df_duplicados <- df_ingresos_trab %>% 
   get_dupes()
 
@@ -284,8 +287,7 @@ head(df_duplicados, n = 3)
 🪛 `distinct()`: _Filtra y mantiene solo filas únicas según variables específicas._
 
 ```{r}
-# Identifico casos duplicados si los hay
-
+### Procesamiento (elimino duplicados)
 df_ingresos_trab <- df_ingresos_trab %>% 
   distinct()
 
@@ -293,6 +295,15 @@ df_ingresos_trab <- df_ingresos_trab %>%
 df_ingresos_trab %>% 
   get_dupes()
 ```
+
+## Procesamiento de datos
+
+<br>
+<br>
+
+¿Y si considero un caso "duplicado" sólo por dos de sus variables?
+
+
 
 ## Procesamiento de datos
 
@@ -331,11 +342,14 @@ valor_ingreso_max_puebla
 
 ## Procesamiento de datos
 
-El ingreso máximo de la ciudad de Pueba es de **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**
+<br> 
+
+> El ingreso máximo de la ciudad de Pueba es de **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**
 
 
 ```{r}
-# El ingreso máximo de la ciudad de Pueba es de **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**
+# El ingreso máximo de la ciudad de Pueba es de 
+# **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**
 
 ```
 

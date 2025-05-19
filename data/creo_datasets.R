@@ -1,4 +1,3 @@
-
 ### Cargo librerías
 library(tidyverse)
 library(messy)
@@ -10,7 +9,13 @@ base_original <- tibble(
   "Nombre Persona" = sample(c("Ana", "Luis", "Carlos", "María", "Juan", "Sofía", "Pedro"), 50, replace = TRUE),
   "Edad Persona" = sample(25:60, 50, replace = TRUE),
   "Ciudad Residencia" = sample(c("CDMX", "Monterrey", "Guadalajara", "Puebla", "Querétaro"), 50, replace = TRUE),
-  "Ingreso Anual $" = sample(35000:90000, 50, replace = TRUE)
+  "Ingreso Anual $" = sample(35000:90000, 50, replace = TRUE),
+  "Nivel Educativo" = sample(
+    c("Primario incompleto", "Primario completo",
+      "Secundario completo", "Universitario incompleto",
+      "Universitario completo", "NS/NC", "Sin dato"),
+    50, replace = TRUE
+  )
 )
 
 # Duplicar aleatoriamente algunas filas (simula entrada de datos repetidos)
@@ -23,11 +28,11 @@ datos_sucios <- bind_rows(base_original, duplicados) %>%
     "Ingreso Anual $" = replace(`Ingreso Anual $`, sample(1:100, 8), NA)
   )
 
-### Cambio minusculas/mayúsculas
+# Cambiar aleatoriamente algunos valores a mayúsculas o minúsculas (para mostrar inconsistencias)
 datos_sucios <- change_case(datos_sucios, "Ciudad Residencia")
 
-
+# Ver resultado
 datos_sucios
 
-### Creo el .csv
+# Guardar como .csv
 write_csv(datos_sucios, "data/base_personas_ingreso_anual_2024.csv")

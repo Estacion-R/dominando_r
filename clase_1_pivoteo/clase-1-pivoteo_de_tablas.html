@@ -253,7 +253,7 @@
 <section id="configuración-para-esta-clase-1" class="slide level2">
 <h2>Configuración para esta clase</h2>
 <ul>
-<li>Código para cargar la base directo desde Github, sin tener que descargarla (se necesita conexión a internet)</li>
+<li class="fragment">Código para cargar la base directo desde Github, sin tener que descargarla (se necesita conexión a internet)</li>
 </ul>
 <p><br></p>
 <div class="cell">
@@ -282,7 +282,7 @@
 <section id="procesamiento-de-datos---buenas-prácticas-1" class="slide level2 smaller scrollable" data-transition="slide">
 <h2>Procesamiento de datos - Buenas prácticas</h2>
 <ul>
-<li>Ejemplo: Nombre de columnas</li>
+<li class="fragment">Ejemplo: Nombre de columnas</li>
 </ul>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Diagnosticar</a></li><li><a href="#tabset-1-2">Procesar</a></li><li><a href="#tabset-1-3">Chequear</a></li></ul>
@@ -319,7 +319,7 @@
 <section id="procesamiento-de-datos---buenas-prácticas-2" class="slide level2 smaller scrollable" data-transition="slide">
 <h2>Procesamiento de datos - Buenas prácticas</h2>
 <ul>
-<li>Ejemplo: Categorías de una variable</li>
+<li class="fragment">Ejemplo: Categorías de una variable</li>
 </ul>
 <div class="panel-tabset">
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Diagnosticar</a></li><li><a href="#tabset-2-2">Procesar</a></li><li><a href="#tabset-2-3">Chequear</a></li></ul>
@@ -369,7 +369,7 @@
 </div>
 </div>
 </section>
-<section id="pregunta" class="slide level2">
+<section id="pregunta" class="slide level2 smaller">
 <h2>Pregunta</h2>
 <p><br></p>
 <p>🗳 Votar: ¿Qué hace la función <code>str_to_title()</code>?</p>
@@ -379,10 +379,11 @@
 <pre><code>[1] "Pepe Locura"       "Rodobolfo Lanzini" "Lola Lala"        </code></pre>
 </div>
 </div>
+<p><br></p>
 <ul>
-<li>𝐀 –&gt; Agrega una mayúscula a la primera letra de la primera palabra</li>
-<li>𝐁 –&gt; Agrega una mayúscula a la primera letra de todas las palabras</li>
-<li>𝐂 –&gt; Pasa todo a minúscula</li>
+<li class="fragment">𝐀 –&gt; Agrega una mayúscula a la primera letra de la primera palabra</li>
+<li class="fragment">𝐁 –&gt; Agrega una mayúscula a la primera letra de todas las palabras</li>
+<li class="fragment">𝐂 –&gt; Pasa todo a minúscula</li>
 </ul>
 </section>
 <section id="procesamiento-de-datos" class="slide level2">
@@ -406,8 +407,8 @@
 <p><br></p>
 <p>🪛 <code>distinct()</code>: <em>Filtra y mantiene solo filas únicas según variables específicas.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="co"># Identifico casos duplicados si los hay</span></span>
-<span id="cb21-2"><a href=""></a></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="do">### Diagnóstico</span></span>
+<span id="cb21-2"><a href=""></a><span class="co"># Identifico si existen casos duplicados</span></span>
 <span id="cb21-3"><a href=""></a>df_duplicados <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
 <span id="cb21-4"><a href=""></a>  <span class="fu">get_dupes</span>()</span>
 <span id="cb21-5"><a href=""></a></span>
@@ -427,14 +428,13 @@
 <p><br></p>
 <p>🪛 <code>distinct()</code>: <em>Filtra y mantiene solo filas únicas según variables específicas.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="co"># Identifico casos duplicados si los hay</span></span>
-<span id="cb23-2"><a href=""></a></span>
-<span id="cb23-3"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb23-4"><a href=""></a>  <span class="fu">distinct</span>()</span>
-<span id="cb23-5"><a href=""></a></span>
-<span id="cb23-6"><a href=""></a><span class="do">### Chequeo</span></span>
-<span id="cb23-7"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb23-8"><a href=""></a>  <span class="fu">get_dupes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="do">### Procesamiento (elimino duplicados)</span></span>
+<span id="cb23-2"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href=""></a>  <span class="fu">distinct</span>()</span>
+<span id="cb23-4"><a href=""></a></span>
+<span id="cb23-5"><a href=""></a><span class="do">### Chequeo</span></span>
+<span id="cb23-6"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb23-7"><a href=""></a>  <span class="fu">get_dupes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 0 × 5
 # ℹ 5 variables: nombre_persona &lt;chr&gt;, edad_persona &lt;dbl&gt;,
@@ -443,6 +443,11 @@
 </div>
 </section>
 <section id="procesamiento-de-datos-4" class="slide level2">
+<h2>Procesamiento de datos</h2>
+<p><br> <br></p>
+<p>¿Y si considero un caso “duplicado” sólo por dos de sus variables?</p>
+</section>
+<section id="procesamiento-de-datos-5" class="slide level2">
 <h2>Procesamiento de datos</h2>
 <p><br></p>
 <p>🪛 <code>pull()</code>: <em>Extrae una columna como vector, facilitando ciertas operaciones.</em></p>
@@ -458,7 +463,7 @@
 </div>
 </div>
 </section>
-<section id="procesamiento-de-datos-5" class="slide level2">
+<section id="procesamiento-de-datos-6" class="slide level2">
 <h2>Procesamiento de datos</h2>
 <p><br></p>
 <p>🪛 <code>pull()</code>: <em>Extrae una columna como vector, facilitando ciertas operaciones.</em></p>
@@ -475,19 +480,23 @@
 </div>
 </div>
 </section>
-<section id="procesamiento-de-datos-6" class="slide level2">
+<section id="procesamiento-de-datos-7" class="slide level2">
 <h2>Procesamiento de datos</h2>
+<p><br></p>
+<blockquote>
 <p>El ingreso máximo de la ciudad de Pueba es de <strong>$89.769</strong></p>
+</blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="co"># El ingreso máximo de la ciudad de Pueba es de **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="co"># El ingreso máximo de la ciudad de Pueba es de </span></span>
+<span id="cb29-2"><a href=""></a><span class="co"># **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="procesamiento-de-datos-7" class="slide level2">
+<section id="procesamiento-de-datos-8" class="slide level2">
 <h2>Procesamiento de datos</h2>
 <p><br></p>
 <p>🪛 <code>dplyr::coalesce()</code>: <em>Ayuda a manejar valores faltantes reemplazándolos con valores específicos.</em></p>
 </section>
-<section id="procesamiento-de-datos-8" class="slide level2">
+<section id="procesamiento-de-datos-9" class="slide level2">
 <h2>Procesamiento de datos</h2>
 <div class="panel-tabset">
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Diagnóstico</a></li><li><a href="#tabset-3-2">Procesamiento</a></li><li><a href="#tabset-3-3">Chequeo</a></li></ul>
