@@ -26,9 +26,14 @@ resources:
 
 options(scipen = 999)
 
+### Cargo librerías
 library(dplyr)
 library(janitor)
 library(magrittr)
+library(readr)
+
+### Cargo dataset
+df_ingresos_orig <- read_csv(here::here("data/base_personas_ingreso_anual_2024.csv"))
 ```
 
 
@@ -122,6 +127,7 @@ library(magrittr)
 
 ```{r}
 #| echo: true
+#| eval: false
 library(readr)
 
 ### Cargo base de trabajo
@@ -133,7 +139,38 @@ df_ingresos_orig <- read_csv(valor_ruta)
 
 ## Procesamiento de datos - Mapa
 
+![](../img/circuito del dato.png)
 
+
+## Procesamiento de datos - La pipa (o tubería)
+
+<br>
+  
+-  EL PIPE 
+
+![](../img/pipe.png)
+- > Una forma de escribir
+
+
+## Procesamiento de datos - La pipa (o tubería)
+
+<br><br>
+
+::: columns
+::: {.column width="50%"}
+```{r eval = F}
+base_de_datos `%>%`
+  funcion1 `%>%` 
+  funcion2 `%>%` 
+  funcion3
+```
+:::
+
+::: {.column width="50%"}
+
+![](../img/pipe_paso_a_paso.gif)
+:::
+:::
 
 ## Procesamiento de datos - Buenas prácticas {.smaller .scrollable transition="slide"}
 
@@ -397,5 +434,215 @@ df_ingresos_trab %>%
 :::
 
 
+
+## Procesamiento de datos
+
+<br>
+
+🪛 `dplyr::na_if()`: _Convierte valores específicos (por ejemplo valores erróneos) a NA._
+
+-->  Útil cuando ciertos códigos o textos (como "NS/NC" o "Sin dato") significan dato faltante.
+
+
+## `na_if()`
+
+✅ Ejemplo 1 — Texto "NS/NC" → NA
+
+```{r}
+### Diagnóstico
+
+df_ingresos_trab %>% 
+  count(nivel_educativo)
+```
+
+## `na_if()`
+
+✅ Ejemplo 1 — Texto "NS/NC" → NA
+
+```{r}
+### Procesamiento
+
+df_ingresos_trab <- df_ingresos_trab %>% 
+  mutate(nivel_educativo = na_if(nivel_educativo, "NS/NC"))
+```
+
+
+## `na_if()`
+
+✅ Ejemplo 1 — Texto "NS/NC" → NA
+
+```{r}
+### Chequeo
+
+df_ingresos_trab %>% 
+  count(nivel_educativo)
+```
+
+## `na_if()`
+
+✅ Ejemplo 1— Texto "NS/NC"  y "Sin dato" → NA
+
+```{r}
+### Diagnóstico
+
+df_ingresos_trab %>% 
+  count(nivel_educativo)
+```
+
+
+## 📦 La familia de funciones `slice()` {.smaller}
+
+<br>
+
+
+| Función          | ¿Qué hace?                                                                  |
+|------------------|-----------------------------------------------------------------------------|
+| `slice_head()`   | _Devuelve las primeras `x` filas del data frame (o de cada grupo si se usa `group_by()`)._ |
+| `slice_tail()`   | _Devuelve las últimas `x` filas del data frame (o de cada grupo)._           |
+| `slice_min()`    | _Devuelve las filas con los valores **mínimos** de la columna `col`._        |
+| `slice_max()`    | _Devuelve las filas con los valores **máximos** de la columna `col`._        |
+| `slice_sample()` | _Selecciona `x` filas de forma aleatoria (útil para crear muestras)._     |
+
+
+## 📦 La familia de funciones `slice()` {.smaller}
+
+
+```{r}
+library(dplyr)
+
+df_ingresos_trab |> 
+  slice_min(
+    ingreso_anual,
+    by = ciudad_residencia)
+```
+
+## 📦 La familia de funciones `slice()` {.smaller}
+
+<br>
+
+¿Y qué pasa si usamos los parámetros `with_ties = TRUE` y `n =`?
+
+```{r}
+#| eval: false
+
+df_ingresos_trab |> 
+  slice_min(
+    ingreso_anual,
+    by = ciudad_residencia,
+    with_ties = TRUE,
+    n = 2)
+```
+
+## 📦 La familia de funciones `slice()` {.smaller}
+
+<br>
+
+¿Y qué pasa si usamos los parámetros `with_ties = TRUE` y `n =`?
+
+```{r}
+#| eval: false
+
+df_ingresos_trab |> 
+  slice_min(
+    ingreso_anual,
+    by = ciudad_residencia,
+    with_ties = TRUE,
+    n = 2)
+```
+
+
+## 📦 La familia de funciones `slice()` {.smaller}
+
+<br>
+
+- 🧠 Extra: ¿cuándo usar slice() y no filter()?
+
+- ✔️ Cuando se quiere trabajar por posición y no por condición lógica.
+
+- ✔️ Cuando se necesita una muestra o los valores extremos por grupo.
+
+- ❌ Si se necesita filtrar por edad, provincia o texto, usar filter().
+
+
+## 🔄 De ancho a largo y de largo a ancho
+
+<br>
+
+Funciones `pivot_longer()` y `pivot_wider()`
+
+
+
+## ¿Qué es pivotear una tabla? {.smaller}
+
+<br>
+
+  > Pivotear significa reorganizar columnas en filas o filas en columnas, sin perder información.
+
+🔁 Es una transformación estructural, no de contenido.
+
+🟦 Formato ancho: muchas columnas → 1 fila por caso
+
+🟥 Formato largo: menos columnas → varias filas por caso
+
+
+## 🔄 De ancho a largo y de largo a ancho
+
+::: columns
+::: {.column width="50%"}
+![](../img/dato_ancho.png)
+:::
+
+::: {.column width="50%"}
+![](../img/dato_largo.png)
+:::
+:::
+
+
+## `pivot_longer()` – de ancho a largo
+
+<br>
+
+```{r}
+head(df_ingresos_trab)
+```
+
+## `pivot_longer()` – de ancho a largo
+
+<br>
+
+```r
+pivot_longer(data,
+             cols = columnas_a_pivotear,
+             names_to = "nombre_nueva_columna",
+             values_to = "nombre_valores")
+```
+
+## `pivot_longer()` – de ancho a largo
+
+```{r}
+ventas <- tibble(
+  producto = c("A", "B"),
+  enero = c(100, 200),
+  febrero = c(150, 250)
+)
+
+head(ventas)
+```
+
+
+## `pivot_longer()` – de ancho a largo
+
+<br>
+
+```{r}
+### Cargo librería
+library(tidyr)
+
+ventas |> 
+  pivot_longer(cols = enero:febrero,
+               names_to = "mes",
+               values_to = "ventas")
+
+```
 
 

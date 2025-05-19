@@ -267,6 +267,30 @@
 </section>
 <section id="procesamiento-de-datos---mapa" class="slide level2">
 <h2>Procesamiento de datos - Mapa</h2>
+
+<img data-src="../img/circuito%20del%20dato.png" class="r-stretch"></section>
+<section id="procesamiento-de-datos---la-pipa-o-tubería" class="slide level2">
+<h2>Procesamiento de datos - La pipa (o tubería)</h2>
+<p><br></p>
+<ul>
+<li class="fragment">EL PIPE</li>
+</ul>
+<p><img data-src="../img/pipe.png"> - &gt; Una forma de escribir</p>
+</section>
+<section id="procesamiento-de-datos---la-pipa-o-tubería-1" class="slide level2">
+<h2>Procesamiento de datos - La pipa (o tubería)</h2>
+<p><br><br></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>base_de_datos <span class="st">`</span><span class="at">%&gt;%</span><span class="st">`</span></span>
+<span id="cb5-2"><a href=""></a>  funcion1 <span class="st">`</span><span class="at">%&gt;%</span><span class="st">`</span> </span>
+<span id="cb5-3"><a href=""></a>  funcion2 <span class="st">`</span><span class="at">%&gt;%</span><span class="st">`</span> </span>
+<span id="cb5-4"><a href=""></a>  funcion3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../img/pipe_paso_a_paso.gif"></p>
+</div></div>
 </section>
 <section id="procesamiento-de-datos---buenas-prácticas" class="slide level2 smaller scrollable" data-transition="slide">
 <h2>Procesamiento de datos - Buenas prácticas</h2>
@@ -289,27 +313,27 @@
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">colnames</span>(df_ingresos_orig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">colnames</span>(df_ingresos_orig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Nombre Persona"    "Edad Persona"      "Ciudad Residencia"
-[4] "Ingreso Anual $"  </code></pre>
+[4] "Ingreso Anual $"   "Nivel Educativo"  </code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">library</span>(janitor)</span>
-<span id="cb7-2"><a href=""></a></span>
-<span id="cb7-3"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_orig <span class="sc">%&gt;%</span> </span>
-<span id="cb7-4"><a href=""></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">library</span>(janitor)</span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_orig <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href=""></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-3">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">colnames</span>(df_ingresos_trab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">colnames</span>(df_ingresos_trab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "nombre_persona"    "edad_persona"      "ciudad_residencia"
-[4] "ingreso_anual"    </code></pre>
+[4] "ingreso_anual"     "nivel_educativo"  </code></pre>
 </div>
 </div>
 </div>
@@ -326,41 +350,42 @@
 <div class="tab-content">
 <div id="tabset-2-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">unique</span>(df_ingresos_trab<span class="sc">$</span>ciudad_residencia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">unique</span>(df_ingresos_trab<span class="sc">$</span>ciudad_residencia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Guadalajara" "Monterrey"   "monterrey"   "Puebla"      "CDMX"       
- [6] "Querétaro"   "PUEBLA"      "GUADALAJARA" "cdmx"        "MONTERREY"  </code></pre>
+<pre><code> [1] "Guadalajara" "Monterrey"   "PUEBLA"      "Puebla"      "CDMX"       
+ [6] "guadalajara" "Querétaro"   "GUADALAJARA" "MONTERREY"   "puebla"     
+[11] "monterrey"  </code></pre>
 </div>
 </div>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">length</span>(<span class="fu">unique</span>(df_ingresos_trab<span class="sc">$</span>ciudad_residencia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">length</span>(<span class="fu">unique</span>(df_ingresos_trab<span class="sc">$</span>ciudad_residencia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
+<pre><code>[1] 11</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-2-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb14-2"><a href=""></a><span class="fu">library</span>(stringr)</span>
-<span id="cb14-3"><a href=""></a></span>
-<span id="cb14-4"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb14-6"><a href=""></a>    <span class="at">ciudad_residencia =</span> <span class="fu">str_to_lower</span>(ciudad_residencia),</span>
-<span id="cb14-7"><a href=""></a>    <span class="at">ciudad_residencia =</span> <span class="fu">str_to_sentence</span>(ciudad_residencia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-2"><a href=""></a><span class="fu">library</span>(stringr)</span>
+<span id="cb15-3"><a href=""></a></span>
+<span id="cb15-4"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-6"><a href=""></a>    <span class="at">ciudad_residencia =</span> <span class="fu">str_to_lower</span>(ciudad_residencia),</span>
+<span id="cb15-7"><a href=""></a>    <span class="at">ciudad_residencia =</span> <span class="fu">str_to_sentence</span>(ciudad_residencia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-2-3">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">unique</span>(df_ingresos_trab<span class="sc">$</span>ciudad_residencia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">unique</span>(df_ingresos_trab<span class="sc">$</span>ciudad_residencia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Guadalajara" "Monterrey"   "Puebla"      "Cdmx"        "Querétaro"  </code></pre>
 </div>
 </div>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">length</span>(<span class="fu">unique</span>(df_ingresos_trab<span class="sc">$</span>ciudad_residencia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">length</span>(<span class="fu">unique</span>(df_ingresos_trab<span class="sc">$</span>ciudad_residencia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
@@ -374,7 +399,7 @@
 <p><br></p>
 <p>🗳 Votar: ¿Qué hace la función <code>str_to_title()</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">str_to_title</span>(<span class="fu">c</span>(<span class="st">"pepe Locura"</span>, <span class="st">"Rodobolfo Lanzini"</span>, <span class="st">"lola lala"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">str_to_title</span>(<span class="fu">c</span>(<span class="st">"pepe Locura"</span>, <span class="st">"Rodobolfo Lanzini"</span>, <span class="st">"lola lala"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Pepe Locura"       "Rodobolfo Lanzini" "Lola Lala"        </code></pre>
 </div>
@@ -407,19 +432,20 @@
 <p><br></p>
 <p>🪛 <code>distinct()</code>: <em>Filtra y mantiene solo filas únicas según variables específicas.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="do">### Diagnóstico</span></span>
-<span id="cb21-2"><a href=""></a><span class="co"># Identifico si existen casos duplicados</span></span>
-<span id="cb21-3"><a href=""></a>df_duplicados <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb21-4"><a href=""></a>  <span class="fu">get_dupes</span>()</span>
-<span id="cb21-5"><a href=""></a></span>
-<span id="cb21-6"><a href=""></a><span class="fu">head</span>(df_duplicados, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="do">### Diagnóstico</span></span>
+<span id="cb22-2"><a href=""></a><span class="co"># Identifico si existen casos duplicados</span></span>
+<span id="cb22-3"><a href=""></a>df_duplicados <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href=""></a>  <span class="fu">get_dupes</span>()</span>
+<span id="cb22-5"><a href=""></a></span>
+<span id="cb22-6"><a href=""></a><span class="fu">head</span>(df_duplicados, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 5
-  nombre_persona edad_persona ciudad_residencia ingreso_anual dupe_count
-  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;      &lt;int&gt;
-1 Pedro                    38 Puebla                    89769          5
-2 Pedro                    38 Puebla                    89769          5
-3 Pedro                    38 Puebla                    89769          5</code></pre>
+<pre><code># A tibble: 3 × 6
+  nombre_persona edad_persona ciudad_residencia ingreso_anual nivel_educativo   
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;             
+1 Sofía                    49 Monterrey                 54512 Primario incomple…
+2 Sofía                    49 Monterrey                 54512 Primario incomple…
+3 Sofía                    49 Monterrey                 54512 Primario incomple…
+# ℹ 1 more variable: dupe_count &lt;int&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -428,17 +454,18 @@
 <p><br></p>
 <p>🪛 <code>distinct()</code>: <em>Filtra y mantiene solo filas únicas según variables específicas.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="do">### Procesamiento (elimino duplicados)</span></span>
-<span id="cb23-2"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb23-3"><a href=""></a>  <span class="fu">distinct</span>()</span>
-<span id="cb23-4"><a href=""></a></span>
-<span id="cb23-5"><a href=""></a><span class="do">### Chequeo</span></span>
-<span id="cb23-6"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb23-7"><a href=""></a>  <span class="fu">get_dupes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="do">### Procesamiento (elimino duplicados)</span></span>
+<span id="cb24-2"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href=""></a>  <span class="fu">distinct</span>()</span>
+<span id="cb24-4"><a href=""></a></span>
+<span id="cb24-5"><a href=""></a><span class="do">### Chequeo</span></span>
+<span id="cb24-6"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb24-7"><a href=""></a>  <span class="fu">get_dupes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 0 × 5
-# ℹ 5 variables: nombre_persona &lt;chr&gt;, edad_persona &lt;dbl&gt;,
-#   ciudad_residencia &lt;chr&gt;, ingreso_anual &lt;dbl&gt;, dupe_count &lt;int&gt;</code></pre>
+<pre><code># A tibble: 0 × 6
+# ℹ 6 variables: nombre_persona &lt;chr&gt;, edad_persona &lt;dbl&gt;,
+#   ciudad_residencia &lt;chr&gt;, ingreso_anual &lt;dbl&gt;, nivel_educativo &lt;chr&gt;,
+#   dupe_count &lt;int&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -452,14 +479,14 @@
 <p><br></p>
 <p>🪛 <code>pull()</code>: <em>Extrae una columna como vector, facilitando ciertas operaciones.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="co"># Obtener vector con todos los ingresos anuales, en modo tidyverse</span></span>
-<span id="cb25-2"><a href=""></a>vec_ingresos <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">|&gt;</span> </span>
-<span id="cb25-3"><a href=""></a>  <span class="fu">filter</span>(ciudad_residencia <span class="sc">==</span> <span class="st">"Puebla"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-4"><a href=""></a>  <span class="fu">pull</span>(ingreso_anual)</span>
-<span id="cb25-5"><a href=""></a></span>
-<span id="cb25-6"><a href=""></a><span class="fu">mean</span>(vec_ingresos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="co"># Obtener vector con todos los ingresos anuales, en modo tidyverse</span></span>
+<span id="cb26-2"><a href=""></a>vec_ingresos <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a href=""></a>  <span class="fu">filter</span>(ciudad_residencia <span class="sc">==</span> <span class="st">"Puebla"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href=""></a>  <span class="fu">pull</span>(ingreso_anual)</span>
+<span id="cb26-5"><a href=""></a></span>
+<span id="cb26-6"><a href=""></a><span class="fu">mean</span>(vec_ingresos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 68713.46</code></pre>
+<pre><code>[1] 65163.85</code></pre>
 </div>
 </div>
 </section>
@@ -468,13 +495,13 @@
 <p><br></p>
 <p>🪛 <code>pull()</code>: <em>Extrae una columna como vector, facilitando ciertas operaciones.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="co"># Obtener vector con todos los ingresos anuales, en modo tidyverse</span></span>
-<span id="cb27-2"><a href=""></a>valor_ingreso_max_puebla <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">|&gt;</span> </span>
-<span id="cb27-3"><a href=""></a>  <span class="fu">filter</span>(ciudad_residencia <span class="sc">==</span> <span class="st">"Puebla"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-4"><a href=""></a>  <span class="fu">filter</span>(ingreso_anual <span class="sc">==</span> <span class="fu">max</span>(ingreso_anual, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-5"><a href=""></a>  <span class="fu">pull</span>(ingreso_anual)</span>
-<span id="cb27-6"><a href=""></a></span>
-<span id="cb27-7"><a href=""></a>valor_ingreso_max_puebla</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="co"># Obtener vector con todos los ingresos anuales, en modo tidyverse</span></span>
+<span id="cb28-2"><a href=""></a>valor_ingreso_max_puebla <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">|&gt;</span> </span>
+<span id="cb28-3"><a href=""></a>  <span class="fu">filter</span>(ciudad_residencia <span class="sc">==</span> <span class="st">"Puebla"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href=""></a>  <span class="fu">filter</span>(ingreso_anual <span class="sc">==</span> <span class="fu">max</span>(ingreso_anual, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-5"><a href=""></a>  <span class="fu">pull</span>(ingreso_anual)</span>
+<span id="cb28-6"><a href=""></a></span>
+<span id="cb28-7"><a href=""></a>valor_ingreso_max_puebla</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 89769</code></pre>
 </div>
@@ -487,8 +514,8 @@
 <p>El ingreso máximo de la ciudad de Pueba es de <strong>$89.769</strong></p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="co"># El ingreso máximo de la ciudad de Pueba es de </span></span>
-<span id="cb29-2"><a href=""></a><span class="co"># **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="co"># El ingreso máximo de la ciudad de Pueba es de </span></span>
+<span id="cb30-2"><a href=""></a><span class="co"># **$`r format(valor_ingreso_max_puebla, big.mark = ".", decimal.mark = ",")`**</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="procesamiento-de-datos-8" class="slide level2">
@@ -503,44 +530,316 @@
 <div class="tab-content">
 <div id="tabset-3-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="co"># Chequeo valores NA en columna `ingreso_anual`</span></span>
-<span id="cb30-2"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb30-3"><a href=""></a>  <span class="fu">count</span>(</span>
-<span id="cb30-4"><a href=""></a>    <span class="st">"valores NA"</span> <span class="ot">=</span> <span class="fu">is.na</span>(ingreso_anual)</span>
-<span id="cb30-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="co"># Chequeo valores NA en columna `ingreso_anual`</span></span>
+<span id="cb31-2"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href=""></a>  <span class="fu">count</span>(</span>
+<span id="cb31-4"><a href=""></a>    <span class="st">"valores NA"</span> <span class="ot">=</span> <span class="fu">is.na</span>(ingreso_anual)</span>
+<span id="cb31-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   `valores NA`     n
   &lt;lgl&gt;        &lt;int&gt;
 1 FALSE           51
-2 TRUE             8</code></pre>
+2 TRUE             7</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-3-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="co"># Reemplazo NA por ceros</span></span>
-<span id="cb32-2"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb32-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb32-4"><a href=""></a>    <span class="at">ingreso_anual =</span> <span class="fu">coalesce</span>(ingreso_anual, <span class="dv">0</span>)</span>
-<span id="cb32-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="co"># Reemplazo NA por ceros</span></span>
+<span id="cb33-2"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb33-4"><a href=""></a>    <span class="at">ingreso_anual =</span> <span class="fu">coalesce</span>(ingreso_anual, <span class="dv">0</span>)</span>
+<span id="cb33-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-3-3">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="co"># Chequeo valores NA en columna `ingreso_anual`</span></span>
-<span id="cb33-2"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
-<span id="cb33-3"><a href=""></a>  <span class="fu">count</span>(</span>
-<span id="cb33-4"><a href=""></a>    <span class="st">"valores NA"</span> <span class="ot">=</span> <span class="fu">is.na</span>(ingreso_anual)</span>
-<span id="cb33-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># Chequeo valores NA en columna `ingreso_anual`</span></span>
+<span id="cb34-2"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href=""></a>  <span class="fu">count</span>(</span>
+<span id="cb34-4"><a href=""></a>    <span class="st">"valores NA"</span> <span class="ot">=</span> <span class="fu">is.na</span>(ingreso_anual)</span>
+<span id="cb34-5"><a href=""></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   `valores NA`     n
   &lt;lgl&gt;        &lt;int&gt;
-1 FALSE           59</code></pre>
+1 FALSE           58</code></pre>
 </div>
 </div>
 </div>
+</div>
+</div>
+</section>
+<section id="procesamiento-de-datos-10" class="slide level2">
+<h2>Procesamiento de datos</h2>
+<p><br></p>
+<p>🪛 <code>dplyr::na_if()</code>: <em>Convierte valores específicos (por ejemplo valores erróneos) a NA.</em></p>
+<p>–&gt; Útil cuando ciertos códigos o textos (como “NS/NC” o “Sin dato”) significan dato faltante.</p>
+</section>
+<section id="na_if" class="slide level2">
+<h2><code>na_if()</code></h2>
+<p>✅ Ejemplo 1 — Texto “NS/NC” → NA</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="do">### Diagnóstico</span></span>
+<span id="cb36-2"><a href=""></a></span>
+<span id="cb36-3"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href=""></a>  <span class="fu">count</span>(nivel_educativo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  nivel_educativo              n
+  &lt;chr&gt;                    &lt;int&gt;
+1 NS/NC                        3
+2 Primario completo           11
+3 Primario incompleto          9
+4 Secundario completo          5
+5 Sin dato                     9
+6 Universitario completo      15
+7 Universitario incompleto     6</code></pre>
+</div>
+</div>
+</section>
+<section id="na_if-1" class="slide level2">
+<h2><code>na_if()</code></h2>
+<p>✅ Ejemplo 1 — Texto “NS/NC” → NA</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="do">### Procesamiento</span></span>
+<span id="cb38-2"><a href=""></a></span>
+<span id="cb38-3"><a href=""></a>df_ingresos_trab <span class="ot">&lt;-</span> df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb38-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">nivel_educativo =</span> <span class="fu">na_if</span>(nivel_educativo, <span class="st">"NS/NC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="na_if-2" class="slide level2">
+<h2><code>na_if()</code></h2>
+<p>✅ Ejemplo 1 — Texto “NS/NC” → NA</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="do">### Chequeo</span></span>
+<span id="cb39-2"><a href=""></a></span>
+<span id="cb39-3"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href=""></a>  <span class="fu">count</span>(nivel_educativo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  nivel_educativo              n
+  &lt;chr&gt;                    &lt;int&gt;
+1 Primario completo           11
+2 Primario incompleto          9
+3 Secundario completo          5
+4 Sin dato                     9
+5 Universitario completo      15
+6 Universitario incompleto     6
+7 &lt;NA&gt;                         3</code></pre>
+</div>
+</div>
+</section>
+<section id="na_if-3" class="slide level2">
+<h2><code>na_if()</code></h2>
+<p>✅ Ejemplo 1— Texto “NS/NC” y “Sin dato” → NA</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="do">### Diagnóstico</span></span>
+<span id="cb41-2"><a href=""></a></span>
+<span id="cb41-3"><a href=""></a>df_ingresos_trab <span class="sc">%&gt;%</span> </span>
+<span id="cb41-4"><a href=""></a>  <span class="fu">count</span>(nivel_educativo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  nivel_educativo              n
+  &lt;chr&gt;                    &lt;int&gt;
+1 Primario completo           11
+2 Primario incompleto          9
+3 Secundario completo          5
+4 Sin dato                     9
+5 Universitario completo      15
+6 Universitario incompleto     6
+7 &lt;NA&gt;                         3</code></pre>
+</div>
+</div>
+</section>
+<section id="la-familia-de-funciones-slice" class="slide level2 smaller">
+<h2>📦 La familia de funciones <code>slice()</code></h2>
+<p><br></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 81%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Función</th>
+<th>¿Qué hace?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>slice_head()</code></td>
+<td><em>Devuelve las primeras <code>x</code> filas del data frame (o de cada grupo si se usa <code>group_by()</code>).</em></td>
+</tr>
+<tr class="even">
+<td><code>slice_tail()</code></td>
+<td><em>Devuelve las últimas <code>x</code> filas del data frame (o de cada grupo).</em></td>
+</tr>
+<tr class="odd">
+<td><code>slice_min()</code></td>
+<td><em>Devuelve las filas con los valores <strong>mínimos</strong> de la columna <code>col</code>.</em></td>
+</tr>
+<tr class="even">
+<td><code>slice_max()</code></td>
+<td><em>Devuelve las filas con los valores <strong>máximos</strong> de la columna <code>col</code>.</em></td>
+</tr>
+<tr class="odd">
+<td><code>slice_sample()</code></td>
+<td><em>Selecciona <code>x</code> filas de forma aleatoria (útil para crear muestras).</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="la-familia-de-funciones-slice-1" class="slide level2 smaller">
+<h2>📦 La familia de funciones <code>slice()</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb43-2"><a href=""></a></span>
+<span id="cb43-3"><a href=""></a>df_ingresos_trab <span class="sc">|&gt;</span> </span>
+<span id="cb43-4"><a href=""></a>  <span class="fu">slice_min</span>(</span>
+<span id="cb43-5"><a href=""></a>    ingreso_anual,</span>
+<span id="cb43-6"><a href=""></a>    <span class="at">by =</span> ciudad_residencia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 5
+  nombre_persona edad_persona ciudad_residencia ingreso_anual nivel_educativo   
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;             
+1 María                    32 Guadalajara                   0 Universitario inc…
+2 Juan                     55 Guadalajara                   0 Universitario com…
+3 Luis                     37 Monterrey                 39255 Primario completo 
+4 Sofía                    36 Puebla                        0 &lt;NA&gt;              
+5 Pedro                    55 Puebla                        0 Universitario com…
+6 Ana                      49 Puebla                        0 Primario completo 
+7 Ana                      29 Cdmx                      38580 Universitario com…
+8 Juan                     59 Querétaro                     0 Universitario com…
+9 Carlos                   46 Querétaro                     0 Sin dato          </code></pre>
+</div>
+</div>
+</section>
+<section id="la-familia-de-funciones-slice-2" class="slide level2 smaller">
+<h2>📦 La familia de funciones <code>slice()</code></h2>
+<p><br></p>
+<p>¿Y qué pasa si usamos los parámetros <code>with_ties = TRUE</code> y <code>n =</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>df_ingresos_trab <span class="sc">|&gt;</span> </span>
+<span id="cb45-2"><a href=""></a>  <span class="fu">slice_min</span>(</span>
+<span id="cb45-3"><a href=""></a>    ingreso_anual,</span>
+<span id="cb45-4"><a href=""></a>    <span class="at">by =</span> ciudad_residencia,</span>
+<span id="cb45-5"><a href=""></a>    <span class="at">with_ties =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb45-6"><a href=""></a>    <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="la-familia-de-funciones-slice-3" class="slide level2 smaller">
+<h2>📦 La familia de funciones <code>slice()</code></h2>
+<p><br></p>
+<p>¿Y qué pasa si usamos los parámetros <code>with_ties = TRUE</code> y <code>n =</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>df_ingresos_trab <span class="sc">|&gt;</span> </span>
+<span id="cb46-2"><a href=""></a>  <span class="fu">slice_min</span>(</span>
+<span id="cb46-3"><a href=""></a>    ingreso_anual,</span>
+<span id="cb46-4"><a href=""></a>    <span class="at">by =</span> ciudad_residencia,</span>
+<span id="cb46-5"><a href=""></a>    <span class="at">with_ties =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb46-6"><a href=""></a>    <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="la-familia-de-funciones-slice-4" class="slide level2 smaller">
+<h2>📦 La familia de funciones <code>slice()</code></h2>
+<p><br></p>
+<ul>
+<li class="fragment"><p>🧠 Extra: ¿cuándo usar slice() y no filter()?</p></li>
+<li class="fragment"><p>✔️ Cuando se quiere trabajar por posición y no por condición lógica.</p></li>
+<li class="fragment"><p>✔️ Cuando se necesita una muestra o los valores extremos por grupo.</p></li>
+<li class="fragment"><p>❌ Si se necesita filtrar por edad, provincia o texto, usar filter().</p></li>
+</ul>
+</section>
+<section id="de-ancho-a-largo-y-de-largo-a-ancho" class="slide level2">
+<h2>🔄 De ancho a largo y de largo a ancho</h2>
+<p><br></p>
+<p>Funciones <code>pivot_longer()</code> y <code>pivot_wider()</code></p>
+</section>
+<section id="qué-es-pivotear-una-tabla" class="slide level2 smaller">
+<h2>¿Qué es pivotear una tabla?</h2>
+<p><br></p>
+<blockquote>
+<p>Pivotear significa reorganizar columnas en filas o filas en columnas, sin perder información.</p>
+</blockquote>
+<p>🔁 Es una transformación estructural, no de contenido.</p>
+<p>🟦 Formato ancho: muchas columnas → 1 fila por caso</p>
+<p>🟥 Formato largo: menos columnas → varias filas por caso</p>
+</section>
+<section id="de-ancho-a-largo-y-de-largo-a-ancho-1" class="slide level2">
+<h2>🔄 De ancho a largo y de largo a ancho</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../img/dato_ancho.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../img/dato_largo.png"></p>
+</div></div>
+</section>
+<section id="pivot_longer-de-ancho-a-largo" class="slide level2">
+<h2><code>pivot_longer()</code> – de ancho a largo</h2>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">head</span>(df_ingresos_trab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  nombre_persona edad_persona ciudad_residencia ingreso_anual nivel_educativo   
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;             
+1 Pedro                    51 Guadalajara               38463 Sin dato          
+2 Pedro                    56 Monterrey                 66316 Primario incomple…
+3 Carlos                   49 Monterrey                 80761 Universitario com…
+4 Sofía                    58 Monterrey                 75524 Universitario com…
+5 Carlos                   53 Puebla                    70525 Primario completo 
+6 Luis                     29 Monterrey                 52095 Primario completo </code></pre>
+</div>
+</div>
+</section>
+<section id="pivot_longer-de-ancho-a-largo-1" class="slide level2">
+<h2><code>pivot_longer()</code> – de ancho a largo</h2>
+<p><br></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="fu">pivot_longer</span>(data,</span>
+<span id="cb49-2"><a href=""></a>             <span class="at">cols =</span> columnas_a_pivotear,</span>
+<span id="cb49-3"><a href=""></a>             <span class="at">names_to =</span> <span class="st">"nombre_nueva_columna"</span>,</span>
+<span id="cb49-4"><a href=""></a>             <span class="at">values_to =</span> <span class="st">"nombre_valores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pivot_longer-de-ancho-a-largo-2" class="slide level2">
+<h2><code>pivot_longer()</code> – de ancho a largo</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>ventas <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb50-2"><a href=""></a>  <span class="at">producto =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>),</span>
+<span id="cb50-3"><a href=""></a>  <span class="at">enero =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>),</span>
+<span id="cb50-4"><a href=""></a>  <span class="at">febrero =</span> <span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">250</span>)</span>
+<span id="cb50-5"><a href=""></a>)</span>
+<span id="cb50-6"><a href=""></a></span>
+<span id="cb50-7"><a href=""></a><span class="fu">head</span>(ventas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  producto enero febrero
+  &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1 A          100     150
+2 B          200     250</code></pre>
+</div>
+</div>
+</section>
+<section id="pivot_longer-de-ancho-a-largo-3" class="slide level2">
+<h2><code>pivot_longer()</code> – de ancho a largo</h2>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="do">### Cargo librería</span></span>
+<span id="cb52-2"><a href=""></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb52-3"><a href=""></a></span>
+<span id="cb52-4"><a href=""></a>ventas <span class="sc">|&gt;</span> </span>
+<span id="cb52-5"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> enero<span class="sc">:</span>febrero,</span>
+<span id="cb52-6"><a href=""></a>               <span class="at">names_to =</span> <span class="st">"mes"</span>,</span>
+<span id="cb52-7"><a href=""></a>               <span class="at">values_to =</span> <span class="st">"ventas"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  producto mes     ventas
+  &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;
+1 A        enero      100
+2 A        febrero    150
+3 B        enero      200
+4 B        febrero    250</code></pre>
 </div>
 </div>
 
